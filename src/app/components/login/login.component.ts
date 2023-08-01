@@ -33,11 +33,25 @@ export class LoginComponent {
 
   onSubmit(){
     if(this.loginForm.valid){
-      this.auth.getUsers(this.loginForm.value).subscribe((data: any) => {this.newData = data});
-      setTimeout(() => {
-        console.log(this.newData);
-      }, 1000);
-      // this.router.navigate(['/home']);
+      this.auth.getUsers(this.loginForm.value).subscribe(
+        (data: any) => {
+          this.newData = data
+          setTimeout(() => {
+            console.log(this.newData[0].Msg);
+            if (this.newData[0].Msg == "SUCCESS"){
+              this.router.navigate(['/home']);
+            }else{
+              this.loginForm.reset();
+              alert("Wrong Username/Password");
+            }
+          }, 1000);
+        },
+        (err : any) => {
+        this.loginForm.reset();
+        alert("Wrong Username/Password");
+        }
+      );
+
     }else{
       this.validateAllFormFields(this.loginForm);
     }
