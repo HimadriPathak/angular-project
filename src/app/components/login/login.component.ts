@@ -3,6 +3,7 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
+import { SharingService } from 'src/app/services/sharing.service';
 
 @Component({
   selector: 'app-login',
@@ -15,9 +16,8 @@ export class LoginComponent {
   eyeIcon: string = "fa-eye-slash";
   loginForm!: FormGroup;
   newData:any;
-
   
-  constructor(private fb: FormBuilder, private router: Router, private auth : AuthService){}
+  constructor(private fb: FormBuilder, private router: Router, private auth : AuthService, private sharingService : SharingService){}
   ngOnInit(): void{
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -37,8 +37,9 @@ export class LoginComponent {
         (data: any) => {
           this.newData = data
           setTimeout(() => {
-            console.log(this.newData[0].Msg);
-            if (this.newData[0].Msg == "SUCCESS"){
+            console.log(this.newData);
+            if (this.newData.Table[0].Msg == "SUCCESS"){
+              this.sharingService.setData(this.newData);
               this.router.navigate(['/home']);
             }else{
               this.loginForm.reset();

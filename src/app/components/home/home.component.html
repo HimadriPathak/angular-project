@@ -1,1 +1,65 @@
-<p>home works!</p>
+<div *ngIf="wardNo != 0; else  elseBlock" class="home">
+    <div class="top">
+            <div class="container">
+            <h1>Nagar Nigam Bikaner</h1>
+            <h4>Safai Karamchari Attendance System</h4>
+            <button class="btn exit" type="button">Exit</button>
+            <div class="row row-1">
+                <div class="col"><p>{{currDate}}</p></div>
+                <div class="col"><p>Circle No. - {{circleNo}}</p></div>
+                <div class="col"><p>Ward No. - {{wardNo}}</p></div>
+            </div>
+            <h4>{{name}}</h4>
+            <div class="row row-2">
+                <div class="col"><p>Morning Time - {{morningTime}}</p></div>
+                <div class="col"><p>Evening Time - {{eveningTime}}</p></div>
+            </div>
+        </div>
+    </div>
+    <div class="bottom">
+        <div class="row">
+            <div class="col"><button type="button">Morning Shift</button></div>
+            <div class="col"><button type="button">Evening Shift</button></div>
+        </div>
+    </div>
+</div>
+
+<ng-template #elseBlock>
+    <div class="home">
+        <div class="top">
+                <div class="container">
+                <h1>Nagar Nigam Bikaner</h1>
+                <h4>Safai Karamchari Attendance System</h4>
+                <button class="btn exit" type="button">Exit</button>
+                <div class="row row-1">
+                    <div class="col"><p>{{currDate}}</p></div>
+                    <div class="col"><p>Circle No. - {{circleNo}}</p></div>
+                </div>
+                <h4>{{name}}</h4>
+                <div class="row row-2">
+                    <div class="col"><p>Morning Time - {{morningTime}}</p></div>
+                    <div class="col"><p>Evening Time - {{eveningTime}}</p></div>
+                </div>
+                <div class="row row-3">
+                    <div class="col"><h5>Ward No. - </h5></div>
+                    <div class="col">
+                        <select #cricket (change)="update($event)">
+                            <option value="default">Select..</option>
+                            <option *ngFor="let ward of wards" [value]="ward">
+                                {{ward}}
+                            </option>
+                        </select>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div class="row">
+                <div class="col"><button type="button">Morning Shift</button></div>
+                <div class="col"><button type="button">Evening Shift</button></div>
+            </div>
+            <p>Select the Ward No.</p>
+        </div>
+    </div>
+</ng-template>
