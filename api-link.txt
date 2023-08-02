@@ -1,1 +1,9 @@
 http://52.172.217.244//SafaikaramchariWebApi/api/Login/WebLogin?Ind=1&OrgID=1003&UserName=8251876812&LoginKey=a1@
+
+
+
+---For Morning Shift
+SPAPIList @Ind=2,@OrgID=1003,@CircleNo=1,@WardNo=10,@ShiftID=1
+
+---For Evening Shift
+SPAPIList @Ind=2,@OrgID=1003,@CircleNo=1,@WardNo=10,@ShiftID=2
