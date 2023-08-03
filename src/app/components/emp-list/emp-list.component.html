@@ -1,0 +1,24 @@
+<div class="no-data" *ngIf ="!empData; else elseBlock">
+    <p>Please Select the Ward No</p>
+</div>
+
+
+<ng-template #elseBlock>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Employee No.</th>
+              <th>Employee Name</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let emp of empData" (click)="updateSelectedList($event)" [class.present]="emp.IsPresent">
+            <td>{{ empData.indexOf(emp) + 1 }}</td>
+            <td>{{ emp.EmployeeNo }}</td>
+            <td>{{ emp.EmployeeName }}</td>
+          </tr>
+        </tbody>
+      </table>
+    <button (click)="submit()" class="btn" type="button">Submit</button>
+</ng-template>

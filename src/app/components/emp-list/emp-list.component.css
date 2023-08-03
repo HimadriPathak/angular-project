@@ -1,0 +1,33 @@
+.no-data{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.no-data p {
+    padding-top: 50px;
+    font-size: 24px;
+    font-weight: 700;
+    color: red;
+}
+
+
+td {
+    background-color: rgb(238, 32, 32);
+    color: white;
+    font-weight: 500;
+}
+
+td.selected {
+    background-color: rgb(238, 183, 32);
+}
+
+td.present{
+    background-color: rgb(64, 201, 64);
+}
+
+.btn{
+    width: 100%;
+    background-color: rgb(238, 183, 32);
+    margin-bottom: 15px;
+}

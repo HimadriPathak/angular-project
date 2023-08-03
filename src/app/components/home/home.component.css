@@ -13,14 +13,14 @@
 }
 
 .top .exit{
-    background-color: white;
+    background-color: red;
     position: absolute;
     top: 25px;
     right: 10px;
     padding: 6px 15px;
     border-radius: 25px;
-    color: red;
-    font-weight: 500;
+    color: white;
+    font-weight: 700;
     font-size: 18px;
 }
 .top .row{
@@ -58,6 +58,7 @@
     background-color: white;
     border-radius: 25px;
     width: 100%;
+    padding: 0 10px;
 }
 .top .row-3 .col h5{
     margin: 0;
@@ -106,7 +107,35 @@
 }
 /* ***************** Top Section End ***************** */
 
+/* ***************** Bottom Section Start ***************** */
+
+
 .bottom{
     background-color: white;
+}
 
+.bottom .row{
+    align-items: center;
+    justify-content: center;
+}
+
+.bottom .col.selected{
+    background-color: rgb(80, 153, 236);
+    box-shadow: 2px 2px 2px rgb(44, 44, 44);
+}
+
+.bottom .col.selected .btn{
+    color: white;
+}
+
+.bottom .col .btn{
+    width: 100%;
+    font-weight: 500;
+}
+.bottom .col .btn:focus{
+    box-shadow: none;
+}
+
+.bottom .col .btn.selected{
+    border-bottom:5px solid white ;
 }

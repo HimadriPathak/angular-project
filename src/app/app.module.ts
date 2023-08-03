@@ -7,13 +7,17 @@ import { LoginComponent } from './components/login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { AuthService } from './services/auth.service';
+import { GetEmpListService } from './services/get-emp-list.service';
+import { EmpListComponent } from './components/emp-list/emp-list.component';
 import { SharingService } from './services/sharing.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    HomeComponent
+    HomeComponent,
+    EmpListComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +25,7 @@ import { SharingService } from './services/sharing.service';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [ AuthService, SharingService],
+  providers: [ AuthService, GetEmpListService, SharingService ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

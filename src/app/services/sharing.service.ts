@@ -4,13 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class SharingService {
-  private data:any = undefined;
-  constructor() {}
-    setData(data:any){
-        this.data = data;
-    }
+  private data:any;
+  constructor() { }
+  setData(data:any){
+    this.data = data;
+  }
 
-    getData():any{
-        return this.data;
-    }
+  getData():any{
+    return this.data;
+  } 
 }

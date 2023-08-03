@@ -3,7 +3,7 @@
             <div class="container">
             <h1>Nagar Nigam Bikaner</h1>
             <h4>Safai Karamchari Attendance System</h4>
-            <button class="btn exit" type="button">Exit</button>
+            <button class="btn exit" type="button" (click) ="appExit()">Exit</button>
             <div class="row row-1">
                 <div class="col"><p>{{currDate}}</p></div>
                 <div class="col"><p>Circle No. - {{circleNo}}</p></div>
@@ -17,9 +17,12 @@
         </div>
     </div>
     <div class="bottom">
-        <div class="row">
-            <div class="col"><button type="button">Morning Shift</button></div>
-            <div class="col"><button type="button">Evening Shift</button></div>
+        <div class="container">
+            <div class="row">
+                <div class="col" [class.selected] = "shiftSelected == true"><button class="btn" (click)="shiftSelected = true; callemplist()" type="button">Morning Shift</button></div>
+                <div class="col" [class.selected] = "shiftSelected != true" ><button class="btn" type="button" (click)="shiftSelected = false; callemplist()">Evening Shift</button></div>
+            </div>
+            <app-emp-list [update]="update"></app-emp-list>
         </div>
     </div>
 </div>
@@ -30,7 +33,7 @@
                 <div class="container">
                 <h1>Nagar Nigam Bikaner</h1>
                 <h4>Safai Karamchari Attendance System</h4>
-                <button class="btn exit" type="button">Exit</button>
+                <button class="btn exit" type="button" (click) ="appExit()">Exit</button>
                 <div class="row row-1">
                     <div class="col"><p>{{currDate}}</p></div>
                     <div class="col"><p>Circle No. - {{circleNo}}</p></div>
@@ -43,8 +46,8 @@
                 <div class="row row-3">
                     <div class="col"><h5>Ward No. - </h5></div>
                     <div class="col">
-                        <select #cricket (change)="update($event)">
-                            <option value="default">Select..</option>
+                        <select #wardList (change)="updateWardNo($event)">
+                            <option value="default">{{"Select.."}}</option>
                             <option *ngFor="let ward of wards" [value]="ward">
                                 {{ward}}
                             </option>
@@ -55,11 +58,14 @@
             </div>
         </div>
         <div class="bottom">
-            <div class="row">
-                <div class="col"><button type="button">Morning Shift</button></div>
-                <div class="col"><button type="button">Evening Shift</button></div>
+            <div class="container">
+                <div class="row">
+                    <div class="col" [class.selected] = "shiftSelected == true"><button class="btn" (click)="shiftSelected = true; callemplist()" type="button">Morning Shift</button></div>
+                    <div class="col" [class.selected] = "shiftSelected != true" ><button class="btn" type="button" (click)="shiftSelected = false; callemplist()">Evening Shift</button></div>
+                </div>
+                <app-emp-list [update]="update"></app-emp-list>
             </div>
-            <p>Select the Ward No.</p>
         </div>
     </div>
 </ng-template>
+

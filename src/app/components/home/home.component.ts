@@ -1,6 +1,11 @@
 import { Component, OnInit} from '@angular/core';
 import { Router } from '@angular/router';
+import { GetEmpListService } from 'src/app/services/get-emp-list.service';
+import { EmpListComponent } from '../emp-list/emp-list.component';
 import { SharingService } from 'src/app/services/sharing.service';
+
+
+const CACHE_KEY = "UserLoginData";
 
 
 @Component({
@@ -9,6 +14,9 @@ import { SharingService } from 'src/app/services/sharing.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent {
+  update = 0;
+  selectedList: any[] = [];
+  shiftSelected: boolean = true;
   currDate:string = '';
   circleNo:any;
   wardNo:any;
@@ -18,11 +26,11 @@ export class HomeComponent {
   data: any;
   selected: any;
   wards:number[] = [];
-  constructor(private router: Router,
-    private sharingService : SharingService){}
+  empData: any;
+  constructor(private router: Router, private emplist: GetEmpListService, private shareData: SharingService){}
 
     ngOnInit(){
-    this.data = this.sharingService.getData();
+    this.data = JSON.parse(localStorage[CACHE_KEY] || '[]');
     this.circleNo = this.data.Table[0].CircleNo;
     this.currDate = this.data.Table[0].CurrentDate;
     this.wardNo = this.data.Table[0].WardNo;
@@ -37,7 +45,38 @@ export class HomeComponent {
     }
     
   }
-  update(e:any){
-    this.selected = e.target.value
+  callemplist(){
+    if(!this.selected){
+      return
+    }
+    this.emplist.getEmpList({
+      'circleNo' : this.circleNo,
+      'wardNo' : this.selected,
+      'shiftID' : this.shiftSelected ? 1:2
+    }).subscribe(
+      (data: any) => {
+        this.empData = data;
+        setTimeout(() => {
+          this.update++;
+          this.shareData.setData(this.empData)
+          
+
+        }, 1000);
+      },
+      (err : any) => {
+      alert("Data Not Found");
+      }
+    );
+  }
+  updateWardNo(e:any){
+    this.selected = e.target.value;
+    this.callemplist();
+  }
+
+  appExit() {
+    alert("Exit Application");
+    localStorage.clear();
+    this.router.navigate(['/login']);
+    
   }
 }

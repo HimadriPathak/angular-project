@@ -3,7 +3,8 @@ import { FormGroup, Validators, FormBuilder, FormControl } from '@angular/forms'
 import { Router } from '@angular/router';
 
 import { AuthService } from 'src/app/services/auth.service';
-import { SharingService } from 'src/app/services/sharing.service';
+
+const CACHE_KEY = "UserLoginData";
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginComponent {
   loginForm!: FormGroup;
   newData:any;
   
-  constructor(private fb: FormBuilder, private router: Router, private auth : AuthService, private sharingService : SharingService){}
+  constructor(private fb: FormBuilder, private router: Router, private auth : AuthService){}
   ngOnInit(): void{
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -39,7 +40,7 @@ export class LoginComponent {
           setTimeout(() => {
             console.log(this.newData);
             if (this.newData.Table[0].Msg == "SUCCESS"){
-              this.sharingService.setData(this.newData);
+              localStorage[CACHE_KEY] = JSON.stringify(this.newData);
               this.router.navigate(['/home']);
             }else{
               this.loginForm.reset();
@@ -52,7 +53,6 @@ export class LoginComponent {
         alert("Wrong Username/Password");
         }
       );
-
     }else{
       this.validateAllFormFields(this.loginForm);
     }
